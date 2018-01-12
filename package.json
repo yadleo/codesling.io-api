@@ -1,0 +1,21 @@
+{
+  "name": "codesling.io-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:setup:rest-server": "cd rest-server && babel-node src/config/database/setup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codesling/codesling.io-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codesling/codesling.io-api/issues"
+  },
+  "homepage": "https://github.com/codesling/codesling.io-api#readme"
+}
