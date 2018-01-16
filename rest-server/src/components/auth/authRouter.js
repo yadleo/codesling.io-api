@@ -11,7 +11,7 @@ import '../../middleware/validation/passport';
 
 const router = express.Router();
 
-router.route('/signUp')
+router.route('/signup')
   .post(validate(formValidation.signUp), signUpController);
 
 router.route('/login')
