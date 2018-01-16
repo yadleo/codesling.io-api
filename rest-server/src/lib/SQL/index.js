@@ -6,7 +6,17 @@ import {
 
 const database = process.env.NODE_ENV === 'production' ? process.env.AWS_DATABASE : process.env.LOCAL_DATABASE;
 
-// need SQL statement to create a user 
+/**
+ * SQL statements for syncing and dropping tables
+ * 
+ * Database
+ * Users
+ * Challenges
+ * Friends
+ * Histories
+ * TestCases
+ * UsersChallenges
+ */
 
 // database SQL statements to create, drop, and use a database
 
@@ -110,6 +120,43 @@ export const dropChallengeTable = async () => {
     success('successfully dropped challenges table');
   } catch (err) {
     error('error dropping challenges table ', err);
+  }
+};
+
+// users-challenges table - creation and deletion
+
+export const createUsersChallengesTable = async () => {
+  try {
+    await db.queryAsync(
+      `
+      CREATE TABLE IF NOT EXISTS usersChallenges
+      (
+        id SERIAL,
+        user_id INT NOT NULL,
+        challenge_id INT NOT NULL,
+        type INT NOT NULL,
+        CONSTRAINT usersChallenges_pk
+          PRIMARY KEY(id),
+        CONSTRAINT fk_usersChallenges_user_id
+          FOREIGN KEY(user_id) REFERENCES users(id),
+        CONSTRAINT fk_usersChallenges_challenge_id
+          FOREIGN KEY(challenge_id) REFERENCES challenges(id)
+      )
+      `
+    );
+    success('succesfully created usersChallenges table')
+  } catch (err) {
+    error('error creating usersChallenges table ', err);
+  }
+};
+
+export const dropUsersChallengesTable = async () => {
+  try {
+    await db.queryAsync(
+      `DROP TABLE IF EXISTS usersChallenges`
+    );
+  } catch (err) {
+    error('error dropping users-challenges table ', err);
   }
 };
 
