@@ -34,5 +34,11 @@ yarn db:setup:rest-server
 ### Start the Servers
 
 ```bash
-yarn start
+yarn start # starts all back-end servers
+
+# or, start them individually:
+
+start:rest-server # starts rest-server
+start:socket-server # starts rest-server
+start:services/coderunner-service # starts rest-server
 ```
