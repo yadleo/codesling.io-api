@@ -30,3 +30,9 @@ yarn setup:socket-server
 yarn setup:services/coderunner-service
 yarn db:setup:rest-server
 ```
+
+### Start the Servers
+
+```bash
+yarn start
+```
