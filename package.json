@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:setup:rest-server": "cd rest-server && babel-node src/config/database/setup.js"
+    "setup:rest-server": "cd rest-server && yarn",
+    "setup:socket-server": "cd socket-server && yarn",
+    "setup:services/coderunner-service": "cd services/coderunner-service && yarn",
+    "db:setup:rest-server": "cd rest-server && babel-node src/config/database/setup.js",
+    "buildEnv": "node bin/buildEnv.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/codesling/codesling.io-api/issues"
   },
-  "homepage": "https://github.com/codesling/codesling.io-api#readme"
+  "homepage": "https://github.com/codesling/codesling.io-api#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
 }

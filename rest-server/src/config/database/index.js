@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import { Pool } from 'pg';
 import Promise from 'bluebird';
 
@@ -20,6 +22,8 @@ const config = {
   port: process.env.NODE_ENV === 'production' ? process.env.AWS_PORT : process.env.LOCAL_PORT,
   max: 20
 };
+
+console.log('config= ', config)
 
 const db = new Pool(config);
 

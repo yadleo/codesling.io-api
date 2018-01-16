@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import db from '../../config/database';
 import {
   success,
@@ -19,7 +21,6 @@ const database = process.env.NODE_ENV === 'production' ? process.env.AWS_DATABAS
  */
 
 // database SQL statements to create, drop, and use a database
-
 export const createDatabase = async () => {
   try {
     await db.queryAsync(
@@ -98,6 +99,7 @@ export const createChallengeTable = async () => {
       CREATE TABLE IF NOT EXISTS challenges
       (
         id SERIAL,
+        title VARCHAR(255) NOT NULL,
         content VARCHAR(255) NOT NULL,
         difficulty INT NOT NULL,
         rating INT,
