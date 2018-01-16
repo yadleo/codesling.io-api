@@ -24,5 +24,8 @@
   "homepage": "https://github.com/codesling/codesling.io-api#readme",
   "dependencies": {
     "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
