@@ -7,7 +7,7 @@ export const addUserChallengeHelper = ({ user_id, challenge_id, type }) => {
 
 export const fetchAllUserChallengesHelper = ({ user_id }) => {
   return `
-    SELECT c.content, c.difficulty, c.rating
+    SELECT c.id, c.title, c.content, c.difficulty, c.rating
     FROM challenges AS c
       INNER JOIN usersChallenges AS uc
       ON (c.id=uc.challenge_id)

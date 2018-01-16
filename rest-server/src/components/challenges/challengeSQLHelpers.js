@@ -1,7 +1,7 @@
-export const addChallengeHelper = ({ content, difficulty }) => {
+export const addChallengeHelper = ({ title, content, difficulty }) => {
   return `
-    INSERT INTO challenges (content, difficulty, rating)
-    VALUES ('${content}', ${difficulty}, 0)
-    RETURNING id, content, difficulty
+    INSERT INTO challenges (title, content, difficulty, rating)
+    VALUES ('${title}', '${content}', ${difficulty}, 0)
+    RETURNING id, title, content, difficulty
   `;
 }

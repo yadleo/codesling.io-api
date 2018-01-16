@@ -20,13 +20,13 @@ import {
  *  @url {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map}
  *
  */
-const clientReady = ({ io, client, room }) => {
+const clientReady = ({ io, client, room }, payload) => {
   log('client ready heard');
-  serverInitialState({ io, client, room });
+  serverInitialState({ io, client, room }, payload);
 };
 
 const clientUpdate = ({ io, client, room }, payload) => {
-  const { text, email } = payload; 
+  const { text, email } = payload;
   log('client update heard. payload.text = ', payload);
   room.set('text', text);
   room.set('email', email);
@@ -42,7 +42,7 @@ const clientRun = async ({ io, room }, payload) => {
   log('running code from client. room.get("text") = ', room.get('text'));
   const { text, email } = payload;
   const url = process.env.CODERUNNER_SERVICE_URL;
-  // const code = room.get('text');
+
   try {
     const { data } = await axios.post(`${url}/submit-code`, { code: text });
     const stdout = data;

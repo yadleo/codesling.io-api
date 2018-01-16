@@ -3,11 +3,21 @@
  *  Server emissions
  *
  */
-export const serverInitialState = ({ client, room }) => {
-  client.emit('server.initialState', {
-    id: client.id,
-    text: room.get('text'),
-  });
+export const serverInitialState = ({ client, room }, payload) => {
+  if (!room.get('challenge')) {
+    room.set('challenge', payload)
+    client.emit('server.initialState', {
+      id: client.id,
+      text: room.get('text'),
+      challenge: payload,
+    });
+  } else {
+    client.emit('server.initialState', {
+      id: client.id,
+      text: room.get('text'),
+      challenge: room.get('challenge'),
+    });
+  }
 };
 
 export const serverChanged = ({ io, room }) => {
