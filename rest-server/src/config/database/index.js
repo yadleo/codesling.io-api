@@ -23,8 +23,6 @@ const config = {
   max: 20
 };
 
-console.log('config= ', config)
-
 const db = new Pool(config);
 
 db.on('connect', () => {
