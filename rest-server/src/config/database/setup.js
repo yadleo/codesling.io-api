@@ -35,6 +35,7 @@ const setup = async () => {
   await createFriendTable();
   await createUsersChallengesTable();
   // await createSabotageTable();
+  process.exit();
 };
 
 setup();
