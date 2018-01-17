@@ -1,20 +1,18 @@
 import express from 'express';
 
 import {
-  addFriendController,
-  removeFriendController,
-  fetchAllFriendsController
+  friendController
 } from './friendsControllers';
 
 const router = express.Router();
 
 router.route('/addFriend')
-  .post(addFriendController);
+  .post(friendController);
 
 router.route('/fetchAllFriends/:user_id/')
-  .get(fetchAllFriendsController);
+  .get(friendController);
 
 router.route('/deleteFriend/:user_id/:friend_id')
-  .delete(removeFriendController);
+  .delete(friendController);
 
 export default router;

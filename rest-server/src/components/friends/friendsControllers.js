@@ -1,39 +1,27 @@
 import {
   addFriendQuery,
   removeFriendQuery,
-  fetchAllFriendsQuery
+  fetchAllFriendsQuery,
+  friendQuery
 } from './friendsQueries';
 import {
   success,
   error
 } from '../../lib/log';
 
-export const addFriendController = async (req, res) => {
-  try {
-    const data = await addFriendQuery(req.body);
-    success('addFriendController - successfully added friend ', data);
-    return res.status(200).send(data);
-  } catch (err) {
-    error('addFriendController - error= ', err);
+export const friendController = async (req, res) => {
+  const { url, method } = req;
+  let payload;
+  if (method === 'POST' || method === 'PUT') {
+    payload = req.body;
+  } else {
+    payload = req.params;
   }
-};
-
-export const removeFriendController = async (req, res) => {
   try {
-    const data = await removeFriendQuery(req.params);
-    success('removeFriendController - succesfully removed friend ', data);
-    return res.status(200).send(data);
+    const { rows } = await friendQuery(payload, url);
+    success('friendController - sucessfully retrieved data ', JSON.stringify(rows[0]));
+    return res.status(200).send(rows[0]);
   } catch (err) {
-    error('removeFriendController - error= ', err);
-  }
-};
-
-export const fetchAllFriendsController = async (req, res) => {
-  try {
-    const data = await fetchAllFriendsQuery(req.params.user_id);
-    success('fetchAllFriendsController - successfully retrieved data ', data);
-    return res.status(200).send(data);
-  } catch (err) {
-    error('fetchAllFriendsController - error= ', err);
+    error('friendController - error= ', err);
   }
 };

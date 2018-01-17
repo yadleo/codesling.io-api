@@ -9,38 +9,24 @@ import {
   error
 } from '../../lib/log';
 
-export const addFriendQuery = async (body) => {
+export const friendQueryHelper = async (payload, query) => {
   try {
-    const queryString = addFriendHelper(body);
+    const queryString = query(payload);
     const data = await db.queryAsync(queryString);
-    success('addFriendQuery - successfully retrieved data ', data);
+    success('friendQueryHelper - successfully retrived data ', JSON.stringify(data));
     return data;
   } catch (err) {
-    error('addFriendQuery - error= ', err);
+    error('friendQueryHelper - error= ', err);
     throw new Error(err);
   }
 };
 
-export const removeFriendQuery = async (params) => {
-  try {
-    const queryString = removeFriendHelper(params);
-    const data = await db.queryAsync(queryString);
-    success('removeFriendQuery - successfully removed friend ', data);
-    return data;
-  } catch (err) {
-    error('removeFriendQuery - error= ', err);
-    throw new Error(err);
-  }
-};
-
-export const fetchAllFriendsQuery = async (params) => {
-  try {
-    const queryString = fetchAllFriendsHelper(params);
-    const data = await db.queryAsync(queryString);
-    success('fetchAllFriendsQuery - successfully retrived data ', data);
-    return data;
-  } catch (err) {
-    error('fetchAllFriendsQuery - error= ', err);
-    throw new Error(err);
+export const friendQuery = async (payload, url) => {
+  if (url === '/addFriend') {
+    return await friendQueryHelper(payload, addFriendHelper);
+  } else if (url.includes('/deleteFriend')) {
+    return await friendQueryHelper(payload, removeFriendHelper);
+  } else {
+    return await friendQueryHelper(payload, fetchAllFriendsHelper);
   }
 };
