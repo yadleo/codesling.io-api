@@ -1,7 +1,4 @@
 import {
-  addFriendQuery,
-  removeFriendQuery,
-  fetchAllFriendsQuery,
   friendQuery
 } from './friendsQueries';
 import {
@@ -23,5 +20,6 @@ export const friendController = async (req, res) => {
     return res.status(200).send(rows[0]);
   } catch (err) {
     error('friendController - error= ', err);
+    throw new Error(err);
   }
 };
