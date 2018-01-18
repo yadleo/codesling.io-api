@@ -1,32 +1,16 @@
-import db from '../../config/database';
+import { globalQueryHelper } from '../../lib/components/globals';
 import {
   addFriendHelper,
   removeFriendHelper,
   fetchAllFriendsHelper
 } from './friendsSQLHelpers';
-import {
-  success,
-  error
-} from '../../lib/log';
-
-export const friendQueryHelper = async (payload, query) => {
-  try {
-    const queryString = query(payload);
-    const data = await db.queryAsync(queryString);
-    success('friendQueryHelper - successfully retrived data ', JSON.stringify(data));
-    return data;
-  } catch (err) {
-    error('friendQueryHelper - error= ', err);
-    throw new Error(err);
-  }
-};
 
 export const friendQuery = async (payload, url) => {
   if (url === '/addFriend') {
-    return await friendQueryHelper(payload, addFriendHelper);
+    return await globalQueryHelper(payload, addFriendHelper, 'addFriendQuery');
   } else if (url.includes('/deleteFriend')) {
-    return await friendQueryHelper(payload, removeFriendHelper);
+    return await globalQueryHelper(payload, removeFriendHelper, 'deleteFriendQuery');
   } else {
-    return await friendQueryHelper(payload, fetchAllFriendsHelper);
+    return await globalQueryHelper(payload, fetchAllFriendsHelper, 'fetchAllFriendQuery');
   }
 };
