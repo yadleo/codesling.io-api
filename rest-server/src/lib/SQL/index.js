@@ -316,3 +316,41 @@ export const dropFriendTable = async () => {
     error('error dropping friends table');
   }
 };
+
+// messages table - creation and deletion
+
+export const createMessageTable = async () => {
+  try {
+    await db.queryAsync(
+      `
+      CREATE TABLE IF NOT EXISTS messages
+      (
+        id SERIAL,
+        sender_id INT NOT NULL,
+        receiver_id INT NOT NULL,
+        content VARCHAR(255),
+        CONSTRAINT messages_pk
+        PRIMARY KEY(id),
+        CONSTRAINT fk_messages_receiver_id
+        FOREIGN KEY(receiver_id) REFERENCES users(id),
+        CONSTRAINT fk_messages_sender_id
+        FOREIGN KEY(sender_id) REFERENCES users(id)
+      )
+      `
+    )
+    success('successfully created messages table');
+  } catch (err) {
+    error('error creating messages table ', err);
+  }
+};
+
+export const dropMessageTable = async () => {
+  try {
+    await db.queryAsync(
+      `DROP TABLE IF EXISTS messages`
+    )
+    success('successfully dropped messages table');
+  } catch (err) {
+    error('error dropping messages table ', err);
+  }
+};

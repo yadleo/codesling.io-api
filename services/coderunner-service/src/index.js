@@ -6,7 +6,7 @@ import tmp from 'tmp';
 import cors from 'cors';
 // import vm from 'vm';
 
-import log from './lib/log';
+import { success } from './lib/log';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -36,4 +36,4 @@ app.post('/submit-code', (req, res) => {
   });
 });
 
-app.listen(PORT, log(`coderunner-service is listening on port ${PORT}`));
+app.listen(PORT, success(`coderunner-service is listening on port ${PORT}`));

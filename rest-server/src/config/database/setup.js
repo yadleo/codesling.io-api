@@ -5,6 +5,7 @@ import {
   createHistoryTable,
   createTestCaseTable,
   // createSabotageTable,
+  createMessageTable,
   createFriendTable,
   createUsersChallengesTable,
   dropDatabase,
@@ -13,6 +14,7 @@ import {
   dropHistoryTable,
   dropTestCaseTable,
   // dropSabotageTable,
+  dropMessageTable,
   dropFriendTable,
   dropUsersChallengesTable,
   useDatabase,
@@ -24,6 +26,7 @@ const setup = async () => {
   await dropHistoryTable();
   await dropTestCaseTable();
   await dropFriendTable();
+  await dropMessageTable();
   await dropUserTable();
   await dropChallengeTable();
   // await dropSabotageTable();
@@ -35,6 +38,7 @@ const setup = async () => {
   await createFriendTable();
   await createUsersChallengesTable();
   // await createSabotageTable();
+  await createMessageTable();
   process.exit();
 };
 

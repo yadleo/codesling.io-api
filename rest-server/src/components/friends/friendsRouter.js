@@ -1,8 +1,6 @@
 import express from 'express';
 
-import {
-  friendController
-} from './friendsControllers';
+import { friendController } from './friendsControllers';
 
 const router = express.Router();
 

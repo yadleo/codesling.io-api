@@ -1,6 +1,7 @@
 import db from '../../config/database';
 import {
-  fetchAllUserHelper
+  fetchAllUserHelper,
+  fetchUserHelper
 } from './userSQLHelpers';
 import {
   success,
@@ -18,3 +19,14 @@ export const fetchAllUserQuery = async () => {
     throw new Error(err);
   }
 };
+
+export const fetchUserQuery = async (payload) => {
+  try {
+    const queryString = fetchUserHelper(payload);
+    const data = db.queryAsync(queryString);
+    success('fetchUserQuery - successfully fetched all users ', data);
+    return data;
+  } catch (err) {
+    error('fetchUserQuery - error= ', err);
+  }
+}

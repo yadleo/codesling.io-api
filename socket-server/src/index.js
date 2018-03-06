@@ -4,15 +4,14 @@ import { each } from 'lodash';
 
 import Rooms from './rooms';
 import clientEvents from './clientEvents';
-import log from './lib/log';
+import { success } from './lib/log';
 
 const server = http.createServer();
 const io = SocketIo(server);
 const rooms = new Rooms(io);
 
 io.on('connection', (client) => {
-  client.removeAllListeners();
-  log('client connected');
+  success('client connected');
   const { roomId } = client.handshake.query;
   const room = rooms.findOrCreate(roomId || 'default');
   client.join(room.get('id'));
@@ -23,4 +22,4 @@ io.on('connection', (client) => {
 });
 
 const PORT = process.env.PORT || 4155;
-server.listen(PORT, () => log(`socket server listening on port ${PORT}`));
+server.listen(PORT, () => success(`socket server listening on port ${PORT}`));
