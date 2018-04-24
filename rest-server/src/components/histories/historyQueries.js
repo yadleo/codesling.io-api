@@ -1,38 +1,13 @@
-import db from '../../config/database';
-
+import { globalQueryHelper } from '../../lib/components/';
 import {
   addHistoryHelper,
   fetchAllHistoryHelper
 } from './historySQLHelpers';
-import {
-  success,
-  error
-} from '../../lib/log';
-
-export const historyQueryHelper = async (payload) => {
-  try {
-    const queryString = fetchAllHistoryHelper(payload);
-    const data = await db.queryAsync(queryString);
-    success('historyQueryHelper - successfully retrieved data ', data);
-    return data;
-  } catch (err) {
-    error('historyQueryHelper - error= ', err);
-    throw new Error(err);
-  }
-};
 
 export const historyQuery = async (payload, url) => {
   if (url === '/addHistory') {
-    try {
-      const queryString = addHistoryHelper(payload);
-      const data = await db.queryAsync(queryString);
-      success('historyQueryHelper - successfully retrieved data ', data);
-      return data;
-    } catch (err) {
-      error('historyQueryHelper - error= ', err);
-      throw new Error(err);
-    }
+    return await globalQueryHelper(payload, addHistoryHelper, 'addHistoryHelper', ['outcome', 'time', 'clout', 'user_id', 'challenger_id', 'challenge_id'])
   } else {
-    return await historyQueryHelper(payload, fetchAllHistoryHelper);
+    return await globalQueryHelper(payload, fetchAllHistoryHelper, 'fetchAllHistoryHelper', ['user_id'])
   }
-};
+}

@@ -1,19 +1,29 @@
-import db from '../../config/database';
+import { globalQueryHelper } from '../../lib/components/';
 import {
-  addChallengeHelper
+  addChallengeHelper,
+  fetchChallengeHelper
 } from './challengeSQLHelpers';
-import {
-  success,
-  error
-} from '../../lib/log';
 
-export const addChallengeQuery = async (body) => {
-  try {
-    const queryString = addChallengeHelper(body);
-    const data = await db.queryAsync(queryString);
-    success('addChallengeQuery - successfully added challenge ', data);
-    return data;
-  } catch (err) {
-    error('addChallengeQuery - error= ', err);
+export const challengeQuery = async (payload, url) => {
+  if (url === '/addChallenge') {
+    return await globalQueryHelper(payload, addChallengeHelper, 'addChallengeHelper', ['title', 'content', 'difficulty']);
+  } else {
+    return await globalQueryHelper(payload, fetchChallengeHelper, 'fetchChallengeHelper');
   }
 };
+
+// try {
+//   const query = {
+//     text: queryString,
+//     values: queryPayloadOrganizer(payload, columns),
+//     // rowMode: 'array'
+//   };
+//   await db.query('BEGIN');
+//   const data = await db.query(query);
+//   const moreData = await db.query(userChallengeQuery)
+//   await db.query('COMMIT');
+
+// } catch (err) {
+//   error(`${name} - error= ', ${err}`);
+//   throw new Error(err);
+// }

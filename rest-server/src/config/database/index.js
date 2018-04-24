@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // for testing
 
 import { Pool } from 'pg';
 import Promise from 'bluebird';
@@ -11,7 +11,6 @@ import {
 /**
  * config for pg pool 
  * limiting number of connections to 20
- * must end connection after each query => database.end()
  */
 
 const config = {
@@ -29,10 +28,6 @@ db.on('connect', () => {
   success('successfully connected to pg', config.database);
 });
 
-// db.on('acquire', client => {
-//   success('successfully acquired ', Object.keys(client));
-// })
-
 db.on('remove', client => {
   success('successfully removed client= ', client)
 });
@@ -42,7 +37,5 @@ db.on('error', (err) => {
 });
 
 db.connect();
-
-Promise.promisifyAll(db);
 
 export default db;

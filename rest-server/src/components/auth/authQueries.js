@@ -1,4 +1,5 @@
 import db from '../../config/database';
+import { queryPayloadOrganizer } from '../../lib/components/util';
 import {
   signUpHelper,
   loginHelper
@@ -8,11 +9,13 @@ import {
   error
 } from '../../lib/log';
 
-export const signUpQuery = async (body) => {
+export const signUpQuery = async (payload) => {
   try {
-    const queryString = signUpHelper(body);
-    const data = await db.queryAsync(queryString);
-    // db.release();
+    const query = {
+      text: signUpHelper,
+      values: queryPayloadOrganizer(payload, ['email', 'username', 'password'])
+    }
+    const data = await db.query(query);
     success('signUpQuery - successfully retrieved data ', JSON.stringify(data));
     return data;
   } catch (err) {
@@ -21,11 +24,13 @@ export const signUpQuery = async (body) => {
   }
 };
 
-export const loginQuery = async (body) => {
+export const loginQuery = async (payload) => {
   try {
-    const queryString = loginHelper(body);
-    const data = await db.queryAsync(queryString);
-    // db.end();
+    const query = {
+      text: loginHelper,
+      values: queryPayloadOrganizer(payload, ['email'])
+    }
+    const data = await db.query(query);
     success('loginQuery - successfully retrieved data ', data);
     return data;
   } catch (err) {

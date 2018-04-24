@@ -1,15 +1,12 @@
-export const fetchAllMessagesForUserHelper = ({ sender_id }) => {
-  return `
+export const fetchAllMessagesForUserHelper = `
     SELECT id, sender_id, receiver_id, content
     FROM messages
-    WHERE sender_id=${sender_id}
-  `;
-};
+    WHERE sender_id=$1 AND receiver_id=$2
+    LIMIT 50
+`;
 
-export const saveMessageHelper = ({ sender_id, receiver_id, content }) => {
-  return `
-    INSERT INTO messages (sender_id, receiver_id, content)
-    values (${sender_id}, ${receiver_id},'${content}')
-    RETURNING sender_id, receiver_id, content
-  `;
-};
+export const saveMessageHelper = `
+  INSERT INTO messages (sender_id, receiver_id, content)
+  VALUES ($1, $2, $3)
+  RETURNING id, sender_id, receiver_id, content
+`;

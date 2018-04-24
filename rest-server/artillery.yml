@@ -1,0 +1,22 @@
+config:
+  target: ''
+  phases:
+    - duration: 60
+      arrivalRate: 20
+  defaults:
+    headers:
+      authorization: 
+scenarios:
+  - name: ""
+  - flow:
+    - post:
+        url: ""
+        json:
+          email: ""
+    - post:
+        url: ""
+        json:
+          email: ""
+          password: ""
+          username: ""
+    - 

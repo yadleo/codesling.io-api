@@ -9,7 +9,6 @@ import {
 } from '../../lib/log';
 
 export const generateToken = (id, email) => {
-
   const token = {};
 
   token.accessToken = sign({

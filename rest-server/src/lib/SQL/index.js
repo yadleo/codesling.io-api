@@ -11,6 +11,8 @@ const database = process.env.NODE_ENV === 'production' ? process.env.AWS_DATABAS
 /**
  * SQL statements for syncing and dropping tables
  * 
+ * Used in npm script `db:setup:rest-server`
+ * 
  * Database
  * Users
  * Challenges
@@ -18,12 +20,13 @@ const database = process.env.NODE_ENV === 'production' ? process.env.AWS_DATABAS
  * Histories
  * TestCases
  * UsersChallenges
+ * Sabotages
  */
 
 // database SQL statements to create, drop, and use a database
 export const createDatabase = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `CREATE DATABASE ${database}`
     );
     success('successfully created database ', database);
@@ -34,7 +37,7 @@ export const createDatabase = async () => {
 
 export const dropDatabase = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP DATABASE IF EXISTS ${database}`
     );
     success('successfully dropped database ', database);
@@ -45,7 +48,7 @@ export const dropDatabase = async () => {
 
 export const useDatabase = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `USE IF EXISTS ${database}`
     );
     success('successfully using database ', database);
@@ -58,7 +61,7 @@ export const useDatabase = async () => {
 
 export const createUserTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS users
       (
@@ -81,7 +84,7 @@ export const createUserTable = async () => {
 
 export const dropUserTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP TABLE IF EXISTS users`
     );
     success('successfully dropped users table');
@@ -94,7 +97,7 @@ export const dropUserTable = async () => {
 
 export const createChallengeTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS challenges
       (
@@ -116,7 +119,7 @@ export const createChallengeTable = async () => {
 
 export const dropChallengeTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP TABLE IF EXISTS challenges`
     );
     success('successfully dropped challenges table');
@@ -129,7 +132,7 @@ export const dropChallengeTable = async () => {
 
 export const createUsersChallengesTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS usersChallenges
       (
@@ -154,7 +157,7 @@ export const createUsersChallengesTable = async () => {
 
 export const dropUsersChallengesTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP TABLE IF EXISTS usersChallenges`
     );
   } catch (err) {
@@ -166,7 +169,7 @@ export const dropUsersChallengesTable = async () => {
 
 export const createHistoryTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS histories
       (
@@ -199,7 +202,7 @@ export const createHistoryTable = async () => {
 
 export const dropHistoryTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP TABLE IF EXISTS histories`
     );
     success('successfully dropped histories table');
@@ -212,7 +215,7 @@ export const dropHistoryTable = async () => {
 
 export const createTestCaseTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS testCases
       (
@@ -235,7 +238,7 @@ export const createTestCaseTable = async () => {
 
 export const dropTestCaseTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP TABLE IF EXISTS testCases`
     );
     success('successfully dropped test cases table');
@@ -248,12 +251,13 @@ export const dropTestCaseTable = async () => {
 
 export const createSabotageTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS sabotages
       (
         id SERIAL,
         content VARCHAR(255) NOT NULL,
+        type INT,
         history_id INT,
         CONSTRAINT sabotages_pk
           PRIMARY KEY(id),
@@ -271,7 +275,7 @@ export const createSabotageTable = async () => {
 
 export const dropSabotageTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP TABLE IF EXISTS sabotages`
     );
     success('successfully dropped sabotages table');
@@ -284,7 +288,7 @@ export const dropSabotageTable = async () => {
 
 export const createFriendTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS friends
       (
@@ -308,7 +312,7 @@ export const createFriendTable = async () => {
 
 export const dropFriendTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP TABLE IF EXISTS friends`
     )
     success('successfully dropped friends table');
@@ -321,7 +325,7 @@ export const dropFriendTable = async () => {
 
 export const createMessageTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS messages
       (
@@ -346,7 +350,7 @@ export const createMessageTable = async () => {
 
 export const dropMessageTable = async () => {
   try {
-    await db.queryAsync(
+    await db.query(
       `DROP TABLE IF EXISTS messages`
     )
     success('successfully dropped messages table');

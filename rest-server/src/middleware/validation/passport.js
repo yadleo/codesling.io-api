@@ -22,7 +22,6 @@ const jwtOptions = {
   secretOrKey: process.env.TOKEN_SECRET
 };
 
-
 passport.use(new LocalStrategy(localOptions, async (email, password, done) => {
   try {
     const { rows } = await loginQuery({ email });
@@ -41,7 +40,7 @@ passport.use(new LocalStrategy(localOptions, async (email, password, done) => {
 
 passport.use(new JwtStrategy(jwtOptions, async (jwt_payload, done) => {
   try {
-    const user = await loginHelper(jwt_payload.sub);
+    const user = await loginQuery(jwt_payload.sub);
     if (user.length) {
       return done(null, user);
     } else {

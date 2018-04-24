@@ -1,12 +1,10 @@
 import express from 'express';
 
-import {
-  addTestCaseController
-} from './testCasesControllers';
+import { testCaseController } from './testCasesControllers';
 
 const router = express.Router();
 
 router.route('/')
-  .post(addTestCaseController);
+  .post(testCaseController);
 
 export default router;

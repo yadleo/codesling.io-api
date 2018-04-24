@@ -1,12 +1,15 @@
 import express from 'express';
 
 import {
-  addChallengeController
+  challengeController
 } from './challengeControllers';
 
 const router = express.Router();
 
 router.route('/')
-  .post(addChallengeController);
+  .get(challengeController);
+
+router.route('/addChallenge')
+  .post(challengeController);
 
 export default router;

@@ -1,5 +1,12 @@
 import * as chalk from 'chalk';
 
+/**
+ * Simple logging functions
+ * 
+ * Used purely for development
+ * In production, set environment variable DEBUG to FALSE
+ */
+
 export const success = (...log) => {
   if (process.env.DEBUG === 'TRUE') {
     console.log(chalk.default.white.bgGreen.bold(...log));
@@ -14,7 +21,7 @@ export const warning = (...log) => {
 
 export const error = (...log) => {
   if (process.env.DEBUG === 'TRUE') {
-    console.log(chalk.default.white.bgRed.bold(...log));
+    console.error(chalk.default.white.bgRed.bold(...log));
   }
 };
 

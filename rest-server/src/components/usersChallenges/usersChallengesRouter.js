@@ -1,16 +1,13 @@
 import express from 'express';
 
-import {
-  addUserChallengeController,
-  fetchAllUserChallengesController
-} from './usersChallengesControllers';
+import { userChallengeController } from './usersChallengesControllers';
 
 const router = express.Router();
 
 router.route('/')
-  .post(addUserChallengeController);
+  .post(userChallengeController);
 
 router.route('/:user_id')
-  .get(fetchAllUserChallengesController);
+  .get(userChallengeController);
 
 export default router;

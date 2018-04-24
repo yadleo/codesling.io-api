@@ -1,4 +1,4 @@
-import { globalController } from '../../lib/components/globals';
+import { globalController } from '../../lib/components/';
 import {
   msgQuery,
   fetchMessageQuery
