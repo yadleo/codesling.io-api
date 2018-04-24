@@ -3,7 +3,8 @@ import axios from 'axios';
 import { success } from './lib/log';
 import {
   serverInitialState,
-  serverChanged,
+  clientOneServerChanged,
+  clientTwoServerChanged,
   serverLeave,
   serverRun,
   serverMessage,
@@ -25,12 +26,18 @@ const clientReady = ({ io, client, room }, payload) => {
   serverInitialState({ io, client, room }, payload);
 };
 
-const clientUpdate = ({ io, client, room }, payload) => {
-  const { text, email } = payload;
+const clientOneUpdate = ({ io, client, room }, payload) => {
+  const { text, player } = payload;
   success('client update heard. payload.text = ', payload);
-  room.set('text', text);
-  room.set('email', email);
-  serverChanged({ io, client, room });
+  room.set('playerOne.text', text);
+  clientOneServerChanged({ io, client, room, player });
+};
+
+const clientTwoUpdate = ({ io, client, room }, payload) => {
+  const { text, player } = payload;
+  success('client update heard. payload.text = ', payload);
+  room.set('playerTwo.text', text);
+  clientTwoServerChanged({ io, client, room, player });
 };
 
 const clientDisconnect = ({ io, room }) => {
@@ -40,13 +47,13 @@ const clientDisconnect = ({ io, room }) => {
 
 const clientRun = async ({ io, room }, payload) => {
   success('running code from client. room.get("text") = ', room.get('text'));
-  const { text, email } = payload;
+  const { text, player } = payload;
   const url = process.env.CODERUNNER_SERVICE_URL;
 
   try {
     const { data } = await axios.post(`${url}/submit-code`, { code: text });
     const stdout = data;
-    serverRun({ io, room }, { stdout, email });
+    serverRun({ io, room }, { stdout, player });
   } catch (e) {
     success('error posting to coderunner service from socket server. e = ', e);
   }
@@ -65,7 +72,8 @@ const clientMessage = async ({ io, room }, payload) => {
 
 const clientEmitters = {
   'client.ready': clientReady,
-  'client.update': clientUpdate,
+  'clientOne.update': clientOneUpdate,
+  'clientTwo.update': clientTwoUpdate,
   'client.disconnect': clientDisconnect,
   'client.run': clientRun,
   'client.message': clientMessage,

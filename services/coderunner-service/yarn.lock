@@ -3404,6 +3404,10 @@ safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, s
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
+sandbox@^0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/sandbox/-/sandbox-0.8.6.tgz#d169f18513604e327c9bf1cc39881b0bec4ed7b6"
+
 sane@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/sane/-/sane-2.2.0.tgz#d6d2e2fcab00e3d283c93b912b7c3a20846f1d56"

@@ -6,6 +6,7 @@ To begin developing on the realtime websocket server, run the following from the
 
 ```bash
 yarn
+yarn buildEnv
 yarn start
 ```
 

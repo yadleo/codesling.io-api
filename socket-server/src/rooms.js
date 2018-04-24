@@ -22,7 +22,8 @@ export default class Rooms {
     if (!room) {
       room = new Map();
       room.set('id', roomId);
-      room.set('text', startingText);
+      room.set('playerOne.text', startingText);
+      room.set('playerTwo.text', startingText);
       this.store.set(roomId, room);
     }
     return room;

@@ -3,30 +3,39 @@
  *  Server emissions
  *
  */
-export const serverInitialState = ({ client, room }, payload) => {
+export const serverInitialState = ({ client, room }, { challenge, player }) => {
   if (!room.get('challenge')) {
-    room.set('challenge', payload);
+    room.set('challenge', challenge);
     client.emit('server.initialState', {
       id: client.id,
-      text: room.get('text'),
-      challenge: payload,
+      playerOneText: room.get('playerOne.text'),
+      playerTwoText: room.get('playerTwo.text'),
+      challenge,
     });
   } else {
     client.emit('server.initialState', {
       id: client.id,
-      text: room.get('text'),
+      playerOneText: room.get('playerOne.text'),
+      playerTwoText: room.get('playerTwo.text'),
       challenge: room.get('challenge'),
     });
   }
 };
 
-export const serverChanged = ({ io, room }) => {
+export const clientOneServerChanged = ({ io, room }) => {
   const roomId = room.get('id');
-  const text = room.get('text');
-  const email = room.get('email');
+  const text = room.get('playerOne.text');
   io
     .in(roomId)
-    .emit('server.changed', { text, email });
+    .emit('serverOne.changed', { text, player: 1 });
+};
+
+export const clientTwoServerChanged = ({ io, room }) => {
+  const roomId = room.get('id');
+  const text = room.get('playerTwo.text');
+  io
+    .in(roomId)
+    .emit('serverTwo.changed', { text, player: 2 });
 };
 
 export const serverLeave = ({ io, room }) => {
@@ -35,10 +44,10 @@ export const serverLeave = ({ io, room }) => {
     .emit('server.leave');
 };
 
-export const serverRun = ({ io, room }, { stdout, email }) => {
+export const serverRun = ({ io, room }, { stdout, player }) => {
   io
     .in(room.get('id'))
-    .emit('server.run', { stdout, email });
+    .emit('server.run', { stdout, player });
 };
 
 export const serverMessage = ({ io, room }, message) => {

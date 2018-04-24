@@ -6,6 +6,7 @@ To begin developing on the RESTful JSON Data API, run the following from the `re
 
 ```bash
 yarn
+yarn buildEnv
 yarn start
 ```
 
@@ -13,27 +14,72 @@ yarn start
 ## PostgreSQL
 Depending on the NODE_ENV value, the API will use either the AWS RDS instance or local instance.
 
-Once promisified, all queries are made through `db.queryAsync(queryString)`.
+Once promisified, all queries are made through `db.query(queryString)`.
 
-# API
+# RESTful Server
 
-API takes the following structure:
+RESTful Server components takes the following structure:
 
 ```plaintext
 Start
 |
-SQLHelpers,
+SQLHelpers
 |
-Queries,
+Queries
 |
-Controllers,
+Controllers
 |
 Router
 |
 End
 ```
 
-Endpoints
+`src/lib/components/`
+
+To avoid redundancy, use the global controller and query for basic CRUD operations.
+
+If you need to manipulate the data, then create a unique controller.
+
+```plaintext
+globalQueryHelper
+  Five parameters:
+      {Object} payload - req.body || req.params
+      {Function} query - returns the SQL statement used to query the db
+      {String} name - used as an identifier for development, identifies which query is being executed
+  
+  Returns an object: 
+      {Object} rows from database query
+  
+globalController
+  Two parameters:
+    {Function} query - the query built with the globalQueryHelper, evaluates the url to use the appropriate SQL statement to query the database
+    {String} name - used as an identifier for development, identifies which controller is being executed
+  Returns a controller:
+    {Function} returns a promisified controller
+```
+
+`src/lib/components/util`
+
+```plaintext
+queryPayloadOrganizer
+  While using parameterized queries, databases are vulnerable to SQL injections     without the proper security measures
+
+  Example: 
+  SQL Statement: SELECT FROM users WHERE email=${email};
+  Request Body: email = test@test.com OR 1=1;
+
+  node-postgres provides a method to protect yourself against SQL injections
+  Replacing the template literal with a placeholder ($1, $2, $3)
+
+  const query = {
+  query: SQL_STATEMENT
+  values: [...payload]
+  };
+
+  db.query(query);
+```
+
+## Endpoints
 
 ```plaintext
 - '/api/auth'

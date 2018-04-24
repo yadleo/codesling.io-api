@@ -1,0 +1,10 @@
+config:
+  target: 'http://localhost:4155'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+scenarios:
+  - engine: "socketio"
+  - emit:
+      channel: "server.changed"
+      data:
