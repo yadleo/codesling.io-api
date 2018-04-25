@@ -10,17 +10,22 @@ before_install:
 
 
 install:
- - yarn
- - npm install
 
 before_script:
   # Create a database for your application
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database codesling;' -U postgres
+  - yarn
+  - yarn buildEnv
+  - yarn setup:rest-server
+  - yarn setup:socket-server
+  - yarn setup:services/coderunner-service
+  - yarn db:setup:rest-server
   # Activate PostGIS extension
   # - psql -U postgres -c "create extension postgis"
 
 
-script: yarn test
+script:
+  - yarn test
 
 
 # optional before_deploy
