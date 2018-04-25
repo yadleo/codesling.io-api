@@ -20,6 +20,8 @@ before_script:
   - yarn setup:services/coderunner-service
   - createuser root
   - yarn db:setup:rest-server
+  - yarn start &
+  - sleep 10
 
 script:
   - yarn test
