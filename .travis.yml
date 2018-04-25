@@ -14,6 +14,12 @@ install:
 before_script:
   # Create a database for your application
   - psql -c 'create database codesling;' -U postgres
+  - brew services start postgresql
+  - createuser root
+  - createdb codesling
+  - psql codesling
+
+  # set up environment
   - yarn
   - yarn buildEnv
   - yarn setup:rest-server
