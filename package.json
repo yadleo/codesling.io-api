@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "comment": "should only test socket-server cause there's no test for rest-server something",
-    "test": "npm-run-all -s -c test:rest-server test:socket-server",
+    "comment": "should only test socket-server cause there's no test for rest-server something, npm-run-all -s -c test:rest-server test:socket-server",
+    "test": "cd socket-server && yarn test",
     "test:rest-server": "cd rest-server && yarn test",
     "test:socket-server": "cd socket-server && yarn test",
     "start:rest-server": "cd rest-server && yarn start",
