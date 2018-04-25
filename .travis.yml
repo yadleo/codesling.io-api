@@ -6,27 +6,20 @@ services: "postgresql"
 
 
 # install additional dependencies required by the project
-before_install:
-
-
-install:
+# before_install:
+# install:
 
 before_script:
   # Create a database for your application
   - psql -c 'create database codesling;' -U postgres
-  - psql codesling
-  - createuser root
-
   # set up environment
   - yarn
   - yarn buildEnv
   - yarn setup:rest-server
   - yarn setup:socket-server
   - yarn setup:services/coderunner-service
+  - createuser root
   - yarn db:setup:rest-server
-  # Activate PostGIS extension
-  # - psql -U postgres -c "create extension postgis"
-
 
 script:
   - yarn test
