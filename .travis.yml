@@ -17,7 +17,7 @@ before_script:
   # Create a database for your application
   - psql -c 'create database travis_ci_test;' -U postgres
   # Activate PostGIS extension
-  - psql -U postgres -c "create extension postgis"
+  # - psql -U postgres -c "create extension postgis"
 
 
 script:
