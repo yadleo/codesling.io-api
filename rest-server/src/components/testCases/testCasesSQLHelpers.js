@@ -1,17 +1,17 @@
 export const addTestCaseHelper = `
   INSERT INTO 
-    testCases (content, challenge_id)
+    testCases (testcode, challenge_id)
   VALUES 
     ($1, $2)
   RETURNING
-    id, content, challenge_id
+    id, testcode, challenge_id
 `;
 
 // throw this shit into the challenge fetfch
 export const fetchAllTestCasesHelper = ({ challenge_id }) => {
   return `
     SELECT
-      id, content, challenge_id
+      id, testcode, challenge_id
     FROM
       testCases
     WHERE
