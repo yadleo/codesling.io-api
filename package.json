@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "comment": "should only test socket-server",
+    "test": "npm-run-all -s -c test:rest-server test:socket-server",
+    "test:rest-server": "cd rest-server && yarn test",
+    "test:socket-server": "cd socket-server && yarn test",
     "start:rest-server": "cd rest-server && yarn start",
     "start:socket-server": "cd socket-server && yarn start",
     "start:services/coderunner-service": "cd services/coderunner-service && yarn start",
@@ -28,9 +31,11 @@
   "homepage": "https://github.com/codesling/codesling.io-api#readme",
   "dependencies": {
     "lodash": "^4.17.4",
-    "npm-run-all": "^4.1.2"
+    "npm-run-all": "^4.1.2",
+    "request": "^2.85.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "jest": "^22.4.3"
   }
 }
