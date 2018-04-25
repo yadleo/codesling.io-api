@@ -30,3 +30,5 @@ script:
   # skip_cleanup: true
 # optional after_deploy
 # after_script: 
+
+# "comment": "should only test socket-server cause there's no test for rest-server something, npm-run-all -s -c test:rest-server test:socket-server",
