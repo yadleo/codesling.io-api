@@ -12,13 +12,13 @@ services: "postgresql"
 before_script:
   # Create a database for your application
   - psql -c 'create database codesling;' -U postgres
+  - psql -c "create user root with superuser password '';" -U postgres
   # set up environment
   - yarn
   - yarn buildEnv
   - yarn setup:rest-server
   - yarn setup:socket-server
   - yarn setup:services/coderunner-service
-  - createuser root
   - yarn db:setup:rest-server
   - yarn start &
   - sleep 10
@@ -34,4 +34,3 @@ script:
 # after_script: 
 
 # "comment": "should only test socket-server cause there's no test for rest-server something, npm-run-all -s -c test:rest-server test:socket-server",
-# travis
