@@ -6,11 +6,11 @@ services: "postgresql"
 
 # install additional dependencies required by the project
 before_install:
+ -"yarn"
+ -"npm install"
 
 
 install:
- -"yarn"
- -"npm install"
 
 before_script:
   # Create a database for your application
