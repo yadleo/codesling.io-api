@@ -15,7 +15,6 @@ before_script:
   # Create a database for your application
   - psql -c 'create database codesling;' -U postgres
   - createuser root
-  - createdb codesling
   - psql codesling
 
   # set up environment
