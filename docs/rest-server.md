@@ -42,10 +42,11 @@ If you need to manipulate the data, then create a unique controller.
 
 ```plaintext
 globalQueryHelper
-  Five parameters:
+  Four parameters:
       {Object} payload - req.body || req.params
       {Function} query - returns the SQL statement used to query the db
       {String} name - used as an identifier for development, identifies which query is being executed
+      {Array} columns - list of fields for parameterized query
   
   Returns an object: 
       {Object} rows from database query

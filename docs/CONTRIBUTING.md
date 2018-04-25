@@ -71,6 +71,7 @@ POST /slings
 
 ## Websocket Event
 
+
 **[Event Name]**
 
 [Description of when the event is triggered]
