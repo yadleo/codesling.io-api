@@ -15,6 +15,6 @@ export const fetchAllTestCasesHelper = ({ challenge_id }) => {
     FROM
       testCases
     WHERE
-      challenge_id=${challenge_id}
+      challenge_id=${parseInt(challenge_id)}
   `;
 };
