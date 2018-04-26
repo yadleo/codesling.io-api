@@ -7,6 +7,7 @@ import {
   clientTwoServerChanged,
   serverLeave,
   serverRun,
+  serverSubmit,
   serverMessage,
 } from './serverEvents';
 
@@ -58,6 +59,58 @@ const clientRun = async ({ io, room }, payload) => {
     success('error posting to coderunner service from socket server. e = ', e);
   }
 };
+
+const clientSubmit = async ({ io, room }, payload) => {
+  success('submitting code from client. room.get("text") = ', room.get('text'));
+  const { text, player } = payload;
+  const service_url = process.env.CODERUNNER_SERVICE_URL;
+
+  const rest_url = process.env.REST_SERVER_URL;
+
+  // query db thru rest-server for testCases
+  const testCases = await axios.get(`${rest_url}/${payload.challenge_id}`);
+  let allTestsPass = true;
+
+  for (let i = 0; i < testCases.length; i++) {
+    // Run each test case
+    let test;
+    // Add function invocation with input from testCases[i].input
+    // TO BE COMPLETED AFTER REBASE
+    // test = text + `fn(${testCases[i].input})`
+
+    try {
+      const { data } = await axios.post(`${service_url}/submit-code`, { code: test });
+
+      if (data.result !== testCases[i].output) {
+        allTestsPass = false;
+        const socketEmitNotPassed = {
+          player: player,
+          pass: false,
+          expected: testCases[i].output,
+          got: data.result
+        };
+        serverSubmit({ io, room }, socketEmitNotPassed);
+      }
+
+    } catch (e) {
+      success('error posting to coderunner service from socket server. e = ', e);
+    }
+  }
+
+  if (allTestsPass) {
+    const socketEmitPassed = {
+      player: player,
+      pass: true,
+      expected: null,
+      got: null
+    };
+    serverSubmit({ io, room }, socketEmitPassed);
+  }
+
+};
+
+// client side code
+// socket.on('server.submit', ({ pass, player, expected, got }) => {
 
 const clientMessage = async ({ io, room }, payload) => {
   success('client message heard');
