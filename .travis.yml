@@ -1,0 +1,36 @@
+language: node_js;
+node_js:
+  - "9"
+services: "postgresql"
+
+
+
+# install additional dependencies required by the project
+# before_install:
+# install:
+
+before_script:
+  # Create a database for your application
+  - psql -c 'create database codesling;' -U postgres
+  - psql -c "create user root with superuser password '';" -U postgres
+  # set up environment
+  - yarn
+  - yarn buildEnv
+  - yarn setup:rest-server
+  - yarn setup:socket-server
+  - yarn setup:services/coderunner-service
+  - yarn db:setup:rest-server
+  - yarn start &
+  - sleep 10
+
+script:
+  - yarn test
+
+
+# optional before_deploy
+# optional deploy:
+  # skip_cleanup: true
+# optional after_deploy
+# after_script: 
+
+# "comment": "should only test socket-server cause there's no test for rest-server something, npm-run-all -s -c test:rest-server test:socket-server",
