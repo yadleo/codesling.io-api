@@ -6,7 +6,7 @@ import {
 
 export const challengeQuery = async (payload, url) => {
   if (url === '/addChallenge') {
-    return await globalQueryHelper(payload, addChallengeHelper, 'addChallengeHelper', ['title', 'content', 'difficulty', 'function']);
+    return await globalQueryHelper(payload, addChallengeHelper, 'addChallengeHelper', ['title', 'content', 'difficulty', 'fn']);
   } else {
     return await globalQueryHelper(payload, fetchChallengeHelper, 'fetchChallengeHelper');
   }
