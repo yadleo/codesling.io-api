@@ -58,3 +58,5 @@ typings/
 .env
 
 graveyard.js
+
+.idea
