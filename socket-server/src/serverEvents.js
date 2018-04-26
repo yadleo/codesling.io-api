@@ -50,6 +50,12 @@ export const serverRun = ({ io, room }, { stdout, player }) => {
     .emit('server.run', { stdout, player });
 };
 
+export const serverSubmit = ({ io, room }, { player, pass, expected, got }) => {
+  io
+    .in(room.get('id'))
+    .emit('server.submit', { player, pass, expected, got });
+};
+
 export const serverMessage = ({ io, room }, message) => {
   io
     .in(room.get('id'))

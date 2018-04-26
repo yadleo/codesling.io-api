@@ -6,8 +6,8 @@ import {
 
 export const testCaseQuery = async (payload, url) => {
   if (url === '/') {
-    return await globalQueryHelper(payload, addTestCaseHelper, 'addTestCaseHelper', ['content', 'challenge_id']);
+    return await globalQueryHelper(payload, addTestCaseHelper, 'addTestCaseHelper', ['testcase', 'challenge_id']);
   } else {
-    return await globalQueryHelper(payload, fetchAllTestCasesHelper, 'fetchAllTestCasesHelper');
+    return await globalQueryHelper(payload, fetchAllTestCasesHelper(payload), 'fetchAllTestCasesHelper');
   }
 };

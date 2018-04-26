@@ -8,12 +8,5 @@ export const addChallengeHelper = `
 `;
 
 export const fetchChallengeHelper = `
-  SELECT
-    c.id, c.title, c.content, c.difficulty, c.rating, c.fn, tc.testcode, tc.challenge_id
-  FROM
-    challenges AS c
-  FULL OUTER JOIN
-    testCases AS tc
-  ON
-    (c.id=tc.challenge_id)
-`;
+  SELECT id, title, content, difficulty, rating, fn 
+  FROM challenges`;

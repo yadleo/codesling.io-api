@@ -26,7 +26,8 @@ export const globalQueryHelper = async (payload, queryString, name, columns=[]) 
       text: queryString,
       values: queryPayloadOrganizer(payload, columns),
     };
-    const data = db.query(query);
+    // const data = await db.query(query); FIXED VERSION FROM JUSTIN'S LECTURE
+    const data = db.query(query); // contains bug, waiting until we run into it.
     success(`${name} - successfully retrived data ${JSON.stringify(data)}`);
     return data;
   } catch (err) {
