@@ -19,6 +19,7 @@ before_script:
   - psql -c 'create database codesling;' -U postgres
   - psql -c "create user root with superuser password '';" -U postgres
   # set up environment
+  - yarn
   - yarn buildEnv
   - yarn setup
   # might not need the next line, david cause you're droping the db and starting over
