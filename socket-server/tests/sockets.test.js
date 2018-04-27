@@ -7,12 +7,10 @@ import { after } from 'lodash';
 import clientEvents from '../src/clientEvents';
 
 const text =
-`function hello() {
-  console.log('hello!');
-}
-
-hello();
-`;
+  `function undefined() {
+  // Your code here
+  
+}`;
 
 dotenv.config();
 dotenv.load();
