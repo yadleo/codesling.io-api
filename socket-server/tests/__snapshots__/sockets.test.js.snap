@@ -1,41 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Client interactions Should add a new user to a room and receive the same text 1`] = `
-"function hello() {
-  console.log('hello!');
-}
+exports[`Client interactions Should add a new user to a room and receive the same text 1`] =
+`function fn() {
+  // Your code here
 
-hello();
-"
-`;
+}`;
 
-exports[`Client interactions Should add a new user to a room and receive the same text 2`] = `
-"function hello() {
-  console.log('hello!');
-}
+exports[`Client interactions Should add a new user to a room and receive the same text 2`] =
+`function fn() {
+  // Your code here
 
-hello();
-"
-`;
+}`;
 
-exports[`Client interactions Should add a new user to a room and receive the same text 3`] = `
-"function hello() {
-  console.log('hello!');
-}
+exports[`Client interactions Should add a new user to a room and receive the same text 3`] =
+`function fn() {
+  // Your code here
 
-hello();
-"
-`;
+}`;
 
-exports[`Client interactions Should add a new user to a room and receive the same text 4`] = `
-"function hello() {
-  console.log('hello!');
-}
+exports[`Client interactions Should add a new user to a room and receive the same text 4`] =
+`function fn() {
+  // Your code here
 
-hello();
-"
-`;
+}`;
 
+// FOLLOWING ARE ALL COMMENTED OUT IN TEST
 exports[`Client interactions Should be able to hear emissions from other clients 1`] = `"console.log(\\"Hello, World!\\")"`;
 
 exports[`Client interactions Should be able to run code and have both clients receive stdout 1`] = `
