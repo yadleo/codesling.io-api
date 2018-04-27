@@ -11,7 +11,7 @@
     "start:rest-server": "cd rest-server && yarn start",
     "start:socket-server": "cd socket-server && yarn start",
     "start:services/coderunner-service": "cd services/coderunner-service && yarn start",
-    "setup": "npm-run all -p setup:rest-server setup:socket-server setup:services/coderunner-service",
+    "setup": "npm-run-all -p setup:rest-server setup:socket-server setup:services/coderunner-service",
     "setup:rest-server": "cd rest-server && yarn",
     "setup:socket-server": "cd socket-server && yarn",
     "setup:services/coderunner-service": "cd services/coderunner-service && yarn",
