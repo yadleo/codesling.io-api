@@ -58,6 +58,7 @@ deploy:
   region: us-west-1
   on: *2
 
+  
 # optional before_deploy
 # optional deploy:
   # skip_cleanup: true
