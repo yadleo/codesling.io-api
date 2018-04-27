@@ -76,7 +76,7 @@ export const serverSubmit = ({ io, room }, { player, pass, expected, got, oppone
 
   io
     .in(room.get('id'))
-    .emit('server.submit', { player, pass, expected, got });
+    .emit('server.submit', { player, pass, expected, got, opponent });
 };
 
 export const serverMessage = ({ io, room }, message) => {
