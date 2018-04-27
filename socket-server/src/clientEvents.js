@@ -92,6 +92,7 @@ const clientSubmit = async ({ io, room }, payload) => {
           got: data.result
         };
         serverSubmit({ io, room }, socketEmitNotPassed);
+        break;
       }
 
     } catch (e) {

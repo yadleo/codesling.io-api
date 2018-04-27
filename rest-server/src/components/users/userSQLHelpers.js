@@ -5,11 +5,25 @@ export const fetchAllUserHelper = `
     users
 `;
 
-export const fetchUserHelper = `
+// not used currently
+export const fetchUserHelper = ({ user_id }) => {
+  return `
   SELECT
     id, email, username, password, clout, kdr
   FROM
     users
   WHERE
-    id=$1
+    id=${user_id}
 `;
+}
+
+export const editUserClout = ({ user_id, newClout }) => {
+  return `
+  UPDATE
+    users
+  SET
+    clout = clout + ${parseInt(newClout)}
+  WHERE
+    id=${user_id}
+`;
+}
