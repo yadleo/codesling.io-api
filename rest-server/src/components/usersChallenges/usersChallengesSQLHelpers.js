@@ -7,11 +7,17 @@ export const addUserChallengeHelper = `
     id, user_id, challenge_id, type
 `;
 
-export const fetchAllUserChallengesHelper = `
+export const fetchAllUserChallengesHelper = ({ user_id }) => {
+  return `
   SELECT
-    uc.id, uc.challenge_id, uc.user_id, uc.type
+    uc.challenge_id, uc.user_id, uc.type, c.title, c.content, c.difficulty, c.rating, c.fn
   FROM
     usersChallenges AS uc
+  FULL OUTER JOIN
+    challenges as c
+  ON
+    c.id=uc.challenge_id
   WHERE
-    uc.user_id=$1
-`;
+    uc.user_id=${parseInt(user_id)}
+  `;
+};
