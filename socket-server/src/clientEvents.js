@@ -102,11 +102,15 @@ const clientSubmit = async ({ io, room }, payload) => {
   }
 
   if (allTestsPass) {
+    let opponent = room.get('playerOne').id === player.id ? room.get('playerTwo') : room.get('playerOne');
+    
+
     const socketEmitPassed = {
       player: player,
       pass: true,
       expected: null,
-      got: null
+      got: null,
+      opponent
     };
     serverSubmit({ io, room }, socketEmitPassed);
   }
