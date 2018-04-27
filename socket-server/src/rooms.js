@@ -4,8 +4,6 @@ const startingText =
   
 }`;
 
-
-
 /**
  *
  *  Rooms store
