@@ -5,7 +5,6 @@ export const fetchAllUserHelper = `
     users
 `;
 
-// not used currently
 export const fetchUserHelper = ({ user_id }) => {
   return `
   SELECT
