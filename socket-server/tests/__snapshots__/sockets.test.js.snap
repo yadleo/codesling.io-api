@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+// ALL OF THESE ARE NOT USED ANYMORE
+
 exports[`Client interactions Should add a new user to a room and receive the same text 1`] =
 `function undefined() {
   // Your code here
@@ -24,7 +26,6 @@ exports[`Client interactions Should add a new user to a room and receive the sam
 
 }`;
 
-// FOLLOWING ARE ALL COMMENTED OUT IN TEST
 exports[`Client interactions Should be able to hear emissions from other clients 1`] = `"console.log(\\"Hello, World!\\")"`;
 
 exports[`Client interactions Should be able to run code and have both clients receive stdout 1`] = `
