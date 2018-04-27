@@ -62,7 +62,6 @@ const clientRun = async ({ io, room }, payload) => {
 };
 
 const clientSubmit = async ({ io, room }, payload) => {
-  console.log(payload);
   success('submitting code from client. room.get("text") = ', room.get('text'));
   const { text, player } = payload;
   const service_url = process.env.CODERUNNER_SERVICE_URL;
