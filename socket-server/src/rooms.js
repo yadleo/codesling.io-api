@@ -1,10 +1,8 @@
 const startingText =
-`function hello() {
-  console.log('hello!');
-}
-
-hello();
-`;
+`function fn() {
+  // Your code here
+  
+}`;
 
 /**
  *

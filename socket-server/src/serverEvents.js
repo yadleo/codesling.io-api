@@ -1,9 +1,16 @@
+const { funcNameReplace } = require('./lib/funcNameReplace');
+
 /**
  *
  *  Server emissions
  *
  */
 export const serverInitialState = ({ client, room }, { challenge }) => {
+
+  const newStarterText = funcNameReplace(room.get('playerOne.text'), challenge.fn);
+  room.set('playerOne.text', newStarterText);
+  room.set('playerTwo.text', newStarterText);
+
   if (!room.get('challenge')) {
     room.set('challenge', challenge);
     client.emit('server.initialState', {

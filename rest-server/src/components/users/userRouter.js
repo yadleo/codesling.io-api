@@ -10,6 +10,9 @@ router.route('/')
   .get(userController);
 
 router.route('/:user_id')
+  .get(userController);
+
+router.route('/:user_id')
   .put(userController);
 
 export default router;

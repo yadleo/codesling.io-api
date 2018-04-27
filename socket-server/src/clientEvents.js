@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { isEqual } from 'lodash';
 
 import { success } from './lib/log';
 import {
@@ -83,7 +84,7 @@ const clientSubmit = async ({ io, room }, payload) => {
     try {
       const { data } = await axios.post(`${service_url}/submit-code`, { code: test });
 
-      if (data.result !== testCase.output) {
+      if (!isEqual(JSON.parse(data.result), JSON.parse(testCase.output))) {
         allTestsPass = false;
         const socketEmitNotPassed = {
           player: player,
