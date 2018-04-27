@@ -1,25 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Client interactions Should add a new user to a room and receive the same text 1`] =
-`function fn() {
+`function undefined() {
   // Your code here
 
 }`;
 
 exports[`Client interactions Should add a new user to a room and receive the same text 2`] =
-`function fn() {
+`function undefined() {
   // Your code here
 
 }`;
 
 exports[`Client interactions Should add a new user to a room and receive the same text 3`] =
-`function fn() {
+`function undefined() {
   // Your code here
 
 }`;
 
 exports[`Client interactions Should add a new user to a room and receive the same text 4`] =
-`function fn() {
+`function undefined() {
   // Your code here
 
 }`;
