@@ -3,7 +3,12 @@ node_js:
   - "9"
 services: "postgresql"
 
-
+# defines the directores to cache so we don't have to reinstall it if it's up to date.
+cache:
+  directories:
+    - node_modules
+    - rest-server/node_modules
+    - socket-server/node_modules
 
 # install additional dependencies required by the project
 # before_install:
@@ -14,18 +19,43 @@ before_script:
   - psql -c 'create database codesling;' -U postgres
   - psql -c "create user root with superuser password '';" -U postgres
   # set up environment
-  - yarn
   - yarn buildEnv
-  - yarn setup:rest-server
-  - yarn setup:socket-server
-  - yarn setup:services/coderunner-service
+  - yarn setup
+  # might not need the next line, david cause you're droping the db and starting over
   - yarn db:setup:rest-server
   - yarn start &
   - sleep 10
 
 script:
   - yarn test
+  - find . -type d -name "*node_modules*" -prune -o -type f -print | zip latest.zip -@
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip
 
+deploy:
+- provider: s3
+  # define access key and secret in travis
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  local_dir: dpl_cd_upload
+  # prevents travis from deleting your build artifacts, manually delete deprecated files from Amazon s3 console.
+  skip_cleanup: true
+  on: &2
+    repo: yadleo/codesling.io-api
+    branch: travis
+  bucket: hrla21legacy
+  region: us-west-1
+
+- provider: codedeploy
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: hrla21legacy
+  key: latest.zip
+  bundle_type: zip
+  application: legacy
+  deployment_group: hrla21
+  region: us-west-1
+  on: *2
 
 # optional before_deploy
 # optional deploy:
