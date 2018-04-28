@@ -20,7 +20,7 @@ hooks:
 
   AfterInstall:
     # location of the scripts you want to run in linux
-    - location: /scripts/envSetup.sh
+    - location: ./scripts/envSetup.sh
     # when you want to run it
       timeout: 300
   # ApplicationStart:

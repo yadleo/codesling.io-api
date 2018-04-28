@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "I AM HERE"
+echo "I AM HERE in ENVSETUP"
 # yarn &
 # echo "yarn" &
 # yarn buildEnv &
