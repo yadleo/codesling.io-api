@@ -7,6 +7,14 @@ files:
   - source: ./
     destination: /home/ubuntu/legacy-api
 
+permissions:
+  - object: /home/ubuntu/legacy-api
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+    type:
+      -file
+
 hooks:
   # BeforeInstall:
 
