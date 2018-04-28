@@ -9,9 +9,13 @@ export const addHistoryHelper = `
 
 export const fetchAllHistoryHelper = `
   SELECT
-    id, outcome, time, clout, user_id, challenger_id, challenge_id
+    h.id, h.outcome, h.time, h.clout, h.user_id, u.username as challenger_name, h.challenge_id
   FROM
-    histories
+    histories as h
+  FULL OUTER JOIN
+    users as u
+  ON
+    h.challenger_id=u.id
   WHERE
     user_id=$1
 `;
